@@ -2,7 +2,7 @@
 
 **Comprehensive Indonesian Stock Exchange (IDX) analysis toolkit featuring advanced technical indicators, risk-return optimization, and executive-level investment recommendations with automated dashboard generation.**
 
-![Executive Dashboard](images/IDX_Executive_Dashboard_January_2022-September_2024.png)
+![Executive Dashboard](images/IDX_Executive_Dashboard_January_2022-September_2025.png)
 
 ## 🎯 Project Overview
 
@@ -70,16 +70,16 @@ jupyter notebook idx-stock-analysis.ipynb
 idx-stock-analysis/
 ├── idx-stock-analysis.ipynb          # Main analysis notebook
 ├── images/                           # Generated analysis charts
-│   ├── IDX_Executive_Dashboard_January_2022-September_2024.png
-│   ├── Astra_Price_Forecast_January_2022-September_2024.png
-│   ├── Astra_Technical_Analysis_January_2022-September_2024.png
-│   ├── Bank_Price_Forecast_January_2022-September_2024.png
-│   ├── Bank_Technical_Analysis_January_2022-September_2024.png
-│   ├── IDX_Correlation_Portfolio_Analysis_January_2022-September_2024.png
-│   ├── IDX_Daily_Returns_Analysis_January_2022-September_2024.png
-│   ├── IDX_Stock_Trends_January_2022-September_2024.png
-│   ├── Telkom_Price_Forecast_January_2022-September_2024.png
-│   └── Telkom_Technical_Analysis_January_2022-September_2024.png
+│   ├── IDX_Executive_Dashboard_January_2022-September_2025.png
+│   ├── Astra_Price_Forecast_January_2022-September_2025.png
+│   ├── Astra_Technical_Analysis_January_2022-September_2025.png
+│   ├── Bank_Price_Forecast_January_2022-September_2025.png
+│   ├── Bank_Technical_Analysis_January_2022-September_2025.png
+│   ├── IDX_Correlation_Portfolio_Analysis_January_2022-September_2025.png
+│   ├── IDX_Daily_Returns_Analysis_January_2022-September_2025.png
+│   ├── IDX_Stock_Trends_January_2022-September_2025.png
+│   ├── Telkom_Price_Forecast_January_2022-September_2025.png
+│   └── Telkom_Technical_Analysis_January_2022-September_2025.png
 ├── README.md                         # This file
 ├── LICENSE                           # MIT License
 └── .gitignore                       # Git ignore rules
@@ -90,32 +90,32 @@ idx-stock-analysis/
 ### Executive Dashboard Components
 
 #### 1. Performance Overview
-![Daily Returns Analysis](images/IDX_Daily_Returns_Analysis_January_2022-September_2024.png)
+![Daily Returns Analysis](images/IDX_Daily_Returns_Analysis_January_2022-September_2025.png)
 *Period returns across all analyzed stocks with comparative performance ranking and risk-adjusted return metrics*
 
 #### 2. Risk-Return Matrix
-![Correlation Portfolio Analysis](images/IDX_Correlation_Portfolio_Analysis_January_2022-September_2024.png)
+![Correlation Portfolio Analysis](images/IDX_Correlation_Portfolio_Analysis_January_2022-September_2025.png)
 *Annual return vs volatility positioning with efficient frontier identification and stock positioning analysis*
 
 #### 3. Stock Trends Analysis
-![Stock Trends](images/IDX_Stock_Trends_January_2022-September_2024.png)
+![Stock Trends](images/IDX_Stock_Trends_January_2022-September_2025.png)
 *Multi-stock trend analysis with momentum indicators and market condition assessment*
 
 ## 🔧 Individual Stock Analysis
 
 ### Astra International (ASII)
-![Astra Price Forecast](images/Astra_Price_Forecast_January_2022-September_2024.png)
-![Astra Technical Analysis](images/Astra_Technical_Analysis_January_2022-September_2024.png)
+![Astra Price Forecast](images/Astra_Price_Forecast_January_2022-September_2025.png)
+![Astra Technical Analysis](images/Astra_Technical_Analysis_January_2022-September_2025.png)
 *Complete technical analysis including RSI levels, moving averages, and momentum indicators*
 
 ### Bank Central Asia (BBCA)
-![Bank Price Forecast](images/Bank_Price_Forecast_January_2022-September_2024.png)
-![Bank Technical Analysis](images/Bank_Technical_Analysis_January_2022-September_2024.png)
+![Bank Price Forecast](images/Bank_Price_Forecast_January_2022-September_2025.png)
+![Bank Technical Analysis](images/Bank_Technical_Analysis_January_2022-September_2025.png)
 *Banking sector analysis with digital banking innovation and financial technology integration*
 
 ### Telkom Indonesia (TLKM)
-![Telkom Price Forecast](images/Telkom_Price_Forecast_January_2022-September_2024.png)
-![Telkom Technical Analysis](images/Telkom_Technical_Analysis_January_2022-September_2024.png)
+![Telkom Price Forecast](images/Telkom_Price_Forecast_January_2022-September_2025.png)
+![Telkom Technical Analysis](images/Telkom_Technical_Analysis_January_2022-September_2025.png)
 *Telecommunications sector analysis with digital transformation metrics*
 
 ## 🔧 Technical Implementation
@@ -128,7 +128,7 @@ import pandas as pd
 
 # IDX stocks analyzed (3 major stocks from different sectors)
 stocks = ['ASII.JK', 'BBCA.JK', 'TLKM.JK']
-stock_data = yf.download(stocks, start='2022-01-01', end='2024-09-30')
+stock_data = yf.download(stocks, start='2022-01-01', end='2025-09-30')
 ```
 
 ### Technical Indicator Calculations
@@ -200,7 +200,7 @@ def calculate_investment_score(stock_data):
 
 ## 📊 Key Performance Indicators
 
-### Analyzed Stocks (January 2022 - September 2024)
+### Analyzed Stocks (January 2022 - September 2025)
 - **ASII.JK** - Astra International (Automotive & Heavy Equipment)
 - **BBCA.JK** - Bank Central Asia (Banking)
 - **TLKM.JK** - Telkom Indonesia (Telecommunications)
@@ -336,4 +336,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Built for Indonesian Capital Markets Analysis** 🇮🇩📊
 
-*Last Updated: September 2024*
+*Last Updated: September 2025*
