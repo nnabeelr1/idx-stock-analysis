@@ -49,20 +49,6 @@ Professional-grade stock analysis system that provides institutional-quality inv
 Python 3.8+
 Jupyter Notebook/Lab
 Financial data source (Yahoo Finance, Bloomberg, etc.)
-```
-
-### Required Libraries
-```bash
-pip install pandas numpy matplotlib seaborn scikit-learn yfinance plotly
-```
-
-### Installation
-```bash
-git clone https://github.com/yourusername/idx-stock-analysis.git
-cd idx-stock-analysis
-pip install -r requirements.txt
-jupyter notebook idx-stock-analysis.ipynb
-```
 
 ## 📁 Project Structure
 
@@ -266,7 +252,7 @@ stocks = ['ASII.JK', 'BBCA.JK', 'TLKM.JK']  # Current stocks
 
 # Change analysis period
 start_date = '2021-01-01'
-end_date = '2024-12-31'
+end_date = '2025-09-24'  
 
 # Adjust technical parameters
 rsi_period = 21  # Default: 14
@@ -304,33 +290,9 @@ ma_periods = [10, 30, 100]  # Default: [20, 50, 200]
 - **External Factors** - Analysis doesn't account for fundamental company changes
 - **Data Quality** - Results depend on accurate and complete market data
 
-## 🤝 Contributing
-
-### How to Contribute
-1. **Fork the repository**
-2. **Create feature branch** (`git checkout -b feature/amazing-feature`)
-3. **Make changes and test**
-4. **Commit changes** (`git commit -m 'Add amazing feature'`)
-5. **Push to branch** (`git push origin feature/amazing-feature`)
-6. **Open Pull Request**
-
-### Development Guidelines
-- Follow PEP 8 coding standards
-- Add docstrings to all functions
-- Include unit tests for new features
-- Update README for significant changes
-
 ## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 📞 Contact & Support
-
-- **GitHub Issues** - Technical problems and bug reports
-- **GitHub Discussions** - Feature requests and general questions
-- **Email** - Professional collaboration inquiries
-
----
 
 **⚠️ REGULATORY DISCLAIMER**: This analysis tool is designed for educational and research purposes. It should not be considered as investment advice, recommendation, or solicitation to buy or sell securities. Indonesian stock market investments carry substantial risks including but not limited to market volatility, currency fluctuation, and regulatory changes. Always consult with licensed Indonesian investment advisors (Wakil Perantara Pedagang Efek) before making investment decisions. Past performance does not guarantee future results.
 
