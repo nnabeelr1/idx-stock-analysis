@@ -49,6 +49,20 @@ Professional-grade stock analysis system that provides institutional-quality inv
 Python 3.8+
 Jupyter Notebook/Lab
 Financial data source (Yahoo Finance, Bloomberg, etc.)
+```
+
+### Required Libraries
+```bash
+pip install pandas numpy matplotlib seaborn scikit-learn yfinance plotly
+```
+
+### Installation
+```bash
+git clone https://github.com/yourusername/idx-stock-analysis.git
+cd idx-stock-analysis
+pip install -r requirements.txt
+jupyter notebook idx-stock-analysis.ipynb
+```
 
 ## 📁 Project Structure
 
@@ -252,7 +266,7 @@ stocks = ['ASII.JK', 'BBCA.JK', 'TLKM.JK']  # Current stocks
 
 # Change analysis period
 start_date = '2021-01-01'
-end_date = '2025-09-24'  
+end_date = '2025-09-24'
 
 # Adjust technical parameters
 rsi_period = 21  # Default: 14
