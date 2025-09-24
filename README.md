@@ -2,7 +2,7 @@
 
 **Comprehensive Indonesian Stock Exchange (IDX) analysis toolkit featuring advanced technical indicators, risk-return optimization, and executive-level investment recommendations with automated dashboard generation.**
 
-![Executive Dashboard](images/IDX_Executive_Dashboard_Example.png)
+![Executive Dashboard](images/IDX_Executive_Dashboard_January_2022-September_2024.png)
 
 ## 🎯 Project Overview
 
@@ -53,7 +53,7 @@ Financial data source (Yahoo Finance, Bloomberg, etc.)
 
 ### Required Libraries
 ```bash
-pip install pandas numpy matplotlib seaborn scikit-learn yfinance
+pip install pandas numpy matplotlib seaborn scikit-learn yfinance plotly
 ```
 
 ### Installation
@@ -61,36 +61,28 @@ pip install pandas numpy matplotlib seaborn scikit-learn yfinance
 git clone https://github.com/yourusername/idx-stock-analysis.git
 cd idx-stock-analysis
 pip install -r requirements.txt
-jupyter notebook
+jupyter notebook idx-stock-analysis.ipynb
 ```
 
 ## 📁 Project Structure
 
 ```
 idx-stock-analysis/
-├── notebooks/
-│   ├── data_collection.ipynb           # Market data acquisition
-│   ├── technical_analysis.ipynb        # Technical indicators calculation
-│   ├── portfolio_optimization.ipynb    # Risk-return analysis
-│   └── executive_dashboard.ipynb       # Dashboard generation
-├── data/
-│   ├── raw/                           # Original market data
-│   ├── processed/                     # Clean, processed datasets
-│   └── external/                      # External market data
-├── images/
-│   ├── IDX_Executive_Dashboard_*.png  # Generated dashboards
-│   ├── performance_analysis.png       # Individual analysis charts
-│   └── technical_indicators.png       # Technical analysis visualizations
-├── src/
-│   ├── data_processor.py              # Data cleaning utilities
-│   ├── technical_indicators.py        # Technical analysis functions
-│   ├── portfolio_optimizer.py         # Portfolio optimization algorithms
-│   └── dashboard_generator.py         # Automated dashboard creation
-├── config/
-│   └── analysis_config.yaml          # Analysis parameters
-├── README.md
-├── requirements.txt
-└── .gitignore
+├── idx-stock-analysis.ipynb          # Main analysis notebook
+├── images/                           # Generated analysis charts
+│   ├── IDX_Executive_Dashboard_January_2022-September_2024.png
+│   ├── Astra_Price_Forecast_January_2022-September_2024.png
+│   ├── Astra_Technical_Analysis_January_2022-September_2024.png
+│   ├── Bank_Price_Forecast_January_2022-September_2024.png
+│   ├── Bank_Technical_Analysis_January_2022-September_2024.png
+│   ├── IDX_Correlation_Portfolio_Analysis_January_2022-September_2024.png
+│   ├── IDX_Daily_Returns_Analysis_January_2022-September_2024.png
+│   ├── IDX_Stock_Trends_January_2022-September_2024.png
+│   ├── Telkom_Price_Forecast_January_2022-September_2024.png
+│   └── Telkom_Technical_Analysis_January_2022-September_2024.png
+├── README.md                         # This file
+├── LICENSE                           # MIT License
+└── .gitignore                       # Git ignore rules
 ```
 
 ## 📊 Sample Analysis Results
@@ -98,36 +90,45 @@ idx-stock-analysis/
 ### Executive Dashboard Components
 
 #### 1. Performance Overview
-![Performance Chart](images/performance_overview.png)
-- Period returns across all analyzed stocks
-- Comparative performance ranking
-- Risk-adjusted return metrics
+![Daily Returns Analysis](images/IDX_Daily_Returns_Analysis_January_2022-September_2024.png)
+*Period returns across all analyzed stocks with comparative performance ranking and risk-adjusted return metrics*
 
 #### 2. Risk-Return Matrix
-![Risk Return Matrix](images/risk_return_matrix.png)
-- Annual return vs volatility positioning
-- Efficient frontier identification
-- Stock positioning analysis
+![Correlation Portfolio Analysis](images/IDX_Correlation_Portfolio_Analysis_January_2022-September_2024.png)
+*Annual return vs volatility positioning with efficient frontier identification and stock positioning analysis*
 
-#### 3. Technical Indicators Dashboard
-![Technical Analysis](images/technical_indicators.png)
-- RSI levels with overbought/oversold zones
-- Moving average trend analysis
-- Momentum indicator signals
+#### 3. Stock Trends Analysis
+![Stock Trends](images/IDX_Stock_Trends_January_2022-September_2024.png)
+*Multi-stock trend analysis with momentum indicators and market condition assessment*
 
-#### 4. Investment Recommendations
-![Investment Table](images/investment_recommendations.png)
-- Quantitative scoring results
-- Buy/Hold/Sell recommendations
-- Portfolio allocation suggestions
+## 🔧 Individual Stock Analysis
+
+### Astra International (ASII)
+![Astra Price Forecast](images/Astra_Price_Forecast_January_2022-September_2024.png)
+![Astra Technical Analysis](images/Astra_Technical_Analysis_January_2022-September_2024.png)
+*Complete technical analysis including RSI levels, moving averages, and momentum indicators*
+
+### Bank Central Asia (BBCA)
+![Bank Price Forecast](images/Bank_Price_Forecast_January_2022-September_2024.png)
+![Bank Technical Analysis](images/Bank_Technical_Analysis_January_2022-September_2024.png)
+*Banking sector analysis with digital banking innovation and financial technology integration*
+
+### Telkom Indonesia (TLKM)
+![Telkom Price Forecast](images/Telkom_Price_Forecast_January_2022-September_2024.png)
+![Telkom Technical Analysis](images/Telkom_Technical_Analysis_January_2022-September_2024.png)
+*Telecommunications sector analysis with digital transformation metrics*
 
 ## 🔧 Technical Implementation
 
 ### Data Processing Pipeline
 ```python
 # Market data collection and preprocessing
-stock_data = fetch_market_data(symbols=['BBCA', 'BMRI', 'TLKM'])
-cleaned_data = preprocess_stock_data(stock_data)
+import yfinance as yf
+import pandas as pd
+
+# IDX stocks analyzed (3 major stocks from different sectors)
+stocks = ['ASII.JK', 'BBCA.JK', 'TLKM.JK']
+stock_data = yf.download(stocks, start='2022-01-01', end='2024-09-30')
 ```
 
 ### Technical Indicator Calculations
@@ -140,6 +141,13 @@ def calculate_rsi(prices, period=14):
     rs = gain / loss
     rsi = 100 - (100 / (1 + rs))
     return rsi
+
+# Moving averages
+def calculate_ma(prices, periods=[20, 50, 200]):
+    mas = {}
+    for period in periods:
+        mas[f'MA_{period}'] = prices.rolling(window=period).mean()
+    return pd.DataFrame(mas)
 ```
 
 ### Investment Scoring Algorithm
@@ -147,178 +155,185 @@ def calculate_rsi(prices, period=14):
 # Multi-factor scoring system
 def calculate_investment_score(stock_data):
     score = 0
-    if trend_strength > threshold: score += 2
-    if rsi_level < 70: score += 1  # Not overbought
-    if sharpe_ratio > 0.5: score += 1
-    if annual_return > benchmark: score += 1
+    
+    # Trend analysis (0-2 points)
+    if stock_data['trend_strength'] > 0.7: score += 2
+    elif stock_data['trend_strength'] > 0.3: score += 1
+    
+    # Technical indicators (0-1 point)
+    if stock_data['rsi'] < 70 and stock_data['rsi'] > 30: score += 1
+    
+    # Risk-adjusted returns (0-1 point)
+    if stock_data['sharpe_ratio'] > 0.5: score += 1
+    
+    # Absolute performance (0-1 point)
+    if stock_data['annual_return'] > 0.05: score += 1
+    
     return min(score, 5)  # Cap at 5
 ```
 
 ## 📈 Analysis Methodology
 
 ### 1. Data Collection
-- **Market Data Sources** - Multiple data provider integration
-- **Data Quality Checks** - Missing value handling and outlier detection
-- **Frequency Management** - Daily, weekly, monthly analysis options
+- **Indonesian Stock Exchange (IDX)** - Primary data source via Yahoo Finance
+- **Period Coverage** - January 2022 to September 2024
+- **Frequency** - Daily closing prices with volume data
+- **Quality Checks** - Missing value handling and corporate action adjustments
 
-### 2. Technical Analysis
-- **Trend Analysis** - Multi-timeframe trend identification
-- **Momentum Indicators** - RSI, MACD, Stochastic calculations
-- **Volume Analysis** - Trading volume pattern recognition
-- **Price Patterns** - Support/resistance level identification
+### 2. Technical Analysis Framework
+- **Trend Analysis** - Multi-timeframe trend identification using moving averages
+- **Momentum Indicators** - RSI with overbought (>70) and oversold (<30) levels
+- **Volume Analysis** - Trading volume patterns for confirmation signals
+- **Support/Resistance** - Key price levels based on historical turning points
 
-### 3. Risk Management
-- **Volatility Metrics** - Historical and implied volatility analysis
-- **Value at Risk (VaR)** - Portfolio risk quantification
-- **Correlation Analysis** - Inter-stock relationship assessment
-- **Regime Detection** - Market condition classification
+### 3. Risk Management Metrics
+- **Volatility Analysis** - Rolling standard deviation of returns
+- **Maximum Drawdown** - Peak-to-trough decline measurement
+- **Sharpe Ratio** - Risk-adjusted return calculation
+- **Beta Analysis** - Market sensitivity relative to IDX Composite
 
-### 4. Portfolio Optimization
-- **Mean Reversion Strategy** - Statistical arbitrage opportunities
-- **Momentum Strategy** - Trend-following position sizing
+### 4. Portfolio Construction
+- **Equal Weight Strategy** - Baseline allocation method
 - **Risk Parity** - Volatility-weighted allocation
-- **Black-Litterman Model** - Bayesian portfolio construction
+- **Score-Based Allocation** - Investment score weighted positions
+- **Correlation Analysis** - Diversification benefit assessment
 
 ## 📊 Key Performance Indicators
 
+### Analyzed Stocks (January 2022 - September 2024)
+- **ASII.JK** - Astra International (Automotive & Heavy Equipment)
+- **BBCA.JK** - Bank Central Asia (Banking)
+- **TLKM.JK** - Telkom Indonesia (Telecommunications)
+
 ### Risk Metrics
-- **Annual Volatility** - Standard deviation of returns
-- **Maximum Drawdown** - Peak-to-trough decline analysis
-- **Sharpe Ratio** - Risk-adjusted return measurement
-- **Beta Coefficient** - Market sensitivity analysis
+- **Annual Volatility** - Annualized standard deviation of daily returns
+- **Maximum Drawdown** - Largest peak-to-trough decline
+- **Value at Risk (95%)** - Maximum expected loss in worst 5% of cases
+- **Beta Coefficient** - Sensitivity to IDX Composite index movements
 
 ### Return Metrics
-- **Total Return** - Price appreciation + dividends
-- **Annual Return** - Annualized performance calculation
-- **Alpha Generation** - Excess return vs benchmark
-- **Information Ratio** - Active return per unit of active risk
-
-### Technical Metrics
-- **RSI Levels** - Current momentum status
-- **Moving Average Position** - Trend confirmation signals
-- **Volume Indicators** - Accumulation/distribution patterns
-- **Volatility Regime** - Current market condition classification
+- **Total Return** - Cumulative price appreciation over analysis period
+- **Annualized Return** - Geometric mean return converted to annual basis
+- **Alpha** - Excess return versus IDX Composite benchmark
+- **Information Ratio** - Alpha divided by tracking error
 
 ## 🎯 Investment Framework
 
-### Scoring Methodology
+### Scoring Methodology (5-Point Scale)
 ```
-Score Components (Max 5 points):
+Investment Score Components:
 ├── Trend Analysis (0-2 points)
-│   ├── Strong Uptrend: 2 points
-│   ├── Uptrend: 1 point
-│   └── Sideways/Down: 0 points
-├── Technical Indicators (0-1 point)
-│   └── RSI < 70 (not overbought): 1 point
-├── Risk-Adjusted Return (0-1 point)
+│   ├── Strong Uptrend (MA20 > MA50 > MA200): 2 points
+│   ├── Uptrend (Price > MA20): 1 point
+│   └── Sideways/Downtrend: 0 points
+├── Technical Momentum (0-1 point)
+│   └── RSI between 30-70 (not extreme): 1 point
+├── Risk-Adjusted Performance (0-1 point)
 │   └── Sharpe Ratio > 0.5: 1 point
-└── Absolute Performance (0-1 point)
+└── Absolute Returns (0-1 point)
     └── Annual Return > 5%: 1 point
 ```
 
-### Recommendation Framework
-- **Score 4-5**: Strong Buy - High conviction positions
-- **Score 3**: Buy - Attractive investment opportunity  
-- **Score 2**: Hold - Neutral position, monitor closely
-- **Score 0-1**: Cautious - High risk, careful evaluation needed
+### Investment Recommendations
+- **Score 4-5** 🟢 **STRONG BUY** - High conviction, overweight position
+- **Score 3** 🟡 **BUY** - Attractive opportunity, market weight  
+- **Score 2** 🟠 **HOLD** - Neutral position, monitor developments
+- **Score 0-1** 🔴 **CAUTION** - High risk, underweight or avoid
 
-## 🚀 Advanced Features
+## 📋 Usage Guide
 
-### Automated Dashboard Generation
-- **Scheduled Updates** - Daily/weekly dashboard refresh
-- **Custom Branding** - Corporate presentation templates
-- **Multi-Format Export** - PNG, PDF, HTML outputs
-- **Email Integration** - Automated report distribution
+### Running the Analysis
+1. **Open Jupyter Notebook**
+   ```bash
+   jupyter notebook idx-stock-analysis.ipynb
+   ```
 
-### Backtesting Engine
-- **Historical Performance** - Strategy validation across time periods
-- **Walk-Forward Analysis** - Out-of-sample testing methodology
-- **Monte Carlo Simulation** - Scenario analysis and stress testing
-- **Performance Attribution** - Factor-based return decomposition
+2. **Execute All Cells**
+   - Run cells sequentially from top to bottom
+   - Analysis takes approximately 5-10 minutes to complete
+   - Charts will be automatically saved to `/images` folder
 
-### API Integration
-- **Real-Time Data** - Live market data feeds
-- **News Sentiment** - Natural language processing integration
-- **Economic Indicators** - Macro factor incorporation
-- **Alternative Data** - Social media, satellite, web scraping
+3. **Review Results**
+   - Executive dashboard provides overall market view
+   - Individual stock analyses show detailed technical indicators
+   - Investment recommendations table summarizes key findings
 
-## 📋 Usage Examples
-
-### Basic Analysis
+### Customizing the Analysis
 ```python
-# Load and analyze stock data
-from src.stock_analyzer import StockAnalyzer
+# Modify stock selection (currently analyzing 3 major IDX stocks)
+stocks = ['ASII.JK', 'BBCA.JK', 'TLKM.JK']  # Current stocks
+# Add more stocks: ['ASII.JK', 'BBCA.JK', 'TLKM.JK', 'UNVR.JK', 'ICBP.JK']
 
-analyzer = StockAnalyzer(['BBCA', 'BMRI', 'TLKM'])
-analyzer.load_data(start_date='2023-01-01')
-analyzer.calculate_indicators()
-analyzer.generate_dashboard()
+# Change analysis period
+start_date = '2021-01-01'
+end_date = '2024-12-31'
+
+# Adjust technical parameters
+rsi_period = 21  # Default: 14
+ma_periods = [10, 30, 100]  # Default: [20, 50, 200]
 ```
 
-### Custom Portfolio Analysis
-```python
-# Custom portfolio with weights
-portfolio = {
-    'BBCA': 0.4,  # 40% allocation
-    'BMRI': 0.35, # 35% allocation  
-    'TLKM': 0.25  # 25% allocation
-}
+## 🔍 Analysis Insights (January 2022 - September 2024)
 
-analyzer.analyze_portfolio(portfolio)
-analyzer.optimize_allocation()
-```
+### Market Performance Summary
+- **Period Covered** - 33 months of Indonesian equity market data
+- **Market Volatility** - High volatility periods during global uncertainty
+- **Sector Performance** - Banking sector showed resilience vs commodity stocks
+- **Technical Patterns** - Clear trend reversals and momentum shifts identified
 
-### Advanced Technical Analysis
-```python
-# Multi-timeframe analysis
-analyzer.calculate_indicators(periods=[14, 30, 50])
-analyzer.identify_patterns()
-analyzer.generate_signals()
-```
+### Key Findings
+- **Best Performer** - Analysis reveals top performing stock with risk metrics
+- **Most Stable** - Lowest volatility stock with consistent returns
+- **Highest Risk** - Maximum drawdown and volatility leaders
+- **Best Risk-Adjusted** - Highest Sharpe ratio achievers
 
 ## ⚠️ Important Disclaimers
 
 ### Investment Risk Warning
-- **Past Performance**: Historical results do not guarantee future returns
-- **Market Risk**: All investments carry risk of principal loss
-- **Model Limitations**: Quantitative models have inherent limitations
-- **Professional Advice**: Consult licensed financial advisors
+**🚨 This analysis is for educational purposes only and does not constitute investment advice.**
 
-### Technical Limitations
-- **Data Accuracy**: Results depend on data quality and availability
-- **Model Assumptions**: Statistical models make simplifying assumptions
-- **Market Conditions**: Analysis may not account for extraordinary events
-- **Execution Risk**: Theoretical returns may differ from actual trading results
+- **Past Performance** ≠ Future Results
+- **Market Risk** - All equity investments carry risk of capital loss
+- **Currency Risk** - IDR fluctuations affect returns for foreign investors
+- **Regulatory Risk** - Indonesian market regulations may impact returns
+- **Liquidity Risk** - Some IDX stocks may have limited trading volumes
+
+### Technical Analysis Limitations
+- **Model Assumptions** - Technical indicators are based on historical patterns
+- **Market Efficiency** - Profitable patterns may disappear as markets adapt
+- **External Factors** - Analysis doesn't account for fundamental company changes
+- **Data Quality** - Results depend on accurate and complete market data
 
 ## 🤝 Contributing
 
-### Development Guidelines
-1. **Code Standards** - Follow PEP 8 style guidelines
-2. **Testing** - Include unit tests for all new functions
-3. **Documentation** - Update README for new features
-4. **Performance** - Optimize for large dataset processing
+### How to Contribute
+1. **Fork the repository**
+2. **Create feature branch** (`git checkout -b feature/amazing-feature`)
+3. **Make changes and test**
+4. **Commit changes** (`git commit -m 'Add amazing feature'`)
+5. **Push to branch** (`git push origin feature/amazing-feature`)
+6. **Open Pull Request**
 
-### Contribution Process
-```bash
-git checkout -b feature/new-indicator
-# Make your changes
-git commit -m "Add new technical indicator"
-git push origin feature/new-indicator
-# Open Pull Request
-```
+### Development Guidelines
+- Follow PEP 8 coding standards
+- Add docstrings to all functions
+- Include unit tests for new features
+- Update README for significant changes
 
 ## 📜 License
 
-This project is licensed under the MIT License - see [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 📞 Support & Contact
+## 📞 Contact & Support
 
-- **Technical Issues**: Create GitHub Issue
-- **Feature Requests**: Use GitHub Discussions
-- **Collaboration**: Email for partnership inquiries
+- **GitHub Issues** - Technical problems and bug reports
+- **GitHub Discussions** - Feature requests and general questions
+- **Email** - Professional collaboration inquiries
 
 ---
 
-**⚠️ INVESTMENT DISCLAIMER**: This tool is for educational and research purposes only. It does not constitute investment advice, recommendation, or solicitation. Trading stocks involves substantial risk and may result in loss of capital. Always conduct your own research and consult with qualified financial professionals before making investment decisions.
+**⚠️ REGULATORY DISCLAIMER**: This analysis tool is designed for educational and research purposes. It should not be considered as investment advice, recommendation, or solicitation to buy or sell securities. Indonesian stock market investments carry substantial risks including but not limited to market volatility, currency fluctuation, and regulatory changes. Always consult with licensed Indonesian investment advisors (Wakil Perantara Pedagang Efek) before making investment decisions. Past performance does not guarantee future results.
 
 **Built for Indonesian Capital Markets Analysis** 🇮🇩📊
+
+*Last Updated: September 2024*
